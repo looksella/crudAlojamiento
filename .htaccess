@@ -1,0 +1,15 @@
+# Redirigir todas las peticiones a /public/
+RewriteEngine On
+
+# Si se accede directamente a la raíz del proyecto, redirigir a /public/
+RewriteCond %{REQUEST_URI} ^/crudAlojamiento/?$
+RewriteRule ^(.*)$ /crudAlojamiento/public/ [L,R=301]
+
+# Si la petición no es para un archivo o directorio existente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Y no es para /public/, redirigir a /public/
+RewriteCond %{REQUEST_URI} !^/crudAlojamiento/public/
+RewriteRule ^(.*)$ /crudAlojamiento/public/$1 [L]
+

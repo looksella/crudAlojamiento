@@ -50,17 +50,17 @@ CREATE TABLE usuarios_alojamientos (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Insertar usuario administrador
--- Contraseña: admin123 (encriptada con password_hash)
+-- Contraseña: admin123
 INSERT INTO usuarios (nombre, email, password, rol) VALUES
-('Administrador', 'admin@alojamientos.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+('Administrador', 'admin@alojamientos.com', '$2y$12$2nrP1hv/iugXJKOqZR6xlOHlt3y5s6o8p0161gC099YDyV2p.Mvs2', 'admin');
 
 -- Insertar alojamientos de ejemplo
 INSERT INTO alojamientos (nombre, descripcion, ubicacion, precio, capacidad, habitaciones, banos, imagen, wifi, estacionamiento, piscina) VALUES
-('Apartamento Acogedor en el Centro', 'Hermoso apartamento de 2 habitaciones en el corazón de la ciudad. Perfecto para familias o grupos pequeños.', 'Madrid, España', 85.00, 4, 2, 1, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800', 1, 0, 0),
-('Villa de Lujo con Piscina', 'Espectacular villa con piscina privada y jardín. Ideal para vacaciones de lujo con vistas al mar.', 'Marbella, España', 250.00, 8, 4, 3, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800', 1, 1, 1),
-('Estudio Moderno con WiFi', 'Estudio moderno y funcional con todas las comodidades. Perfecto para parejas o viajeros solitarios.', 'Barcelona, España', 55.00, 2, 1, 1, 'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800', 1, 0, 0),
-('Casa Rural con Encanto', 'Acogedora casa rural en la sierra. Perfecta para desconectar y disfrutar de la naturaleza.', 'Sierra de Gredos, España', 120.00, 6, 3, 2, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800', 1, 1, 0),
-('Penthouse con Terraza', 'Exclusivo penthouse con terraza privada y vistas panorámicas de la ciudad.', 'Valencia, España', 180.00, 4, 2, 2, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800', 1, 1, 1),
-('Apartamento Familiar cerca de la Playa', 'Espacioso apartamento a pocos metros de la playa. Perfecto para familias con niños.', 'Alicante, España', 95.00, 5, 2, 1, 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800', 1, 1, 0),
-('Loft Industrial en el Casco Antiguo', 'Loft con estilo industrial en el casco antiguo. Techos altos y diseño único.', 'Sevilla, España', 110.00, 3, 1, 1, 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800', 1, 0, 0),
-('Chalet con Jardín Privado', 'Hermoso chalet con jardín privado y barbacoa. Perfecto para reuniones familiares.', 'San Sebastián, España', 160.00, 7, 3, 2, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800', 1, 1, 0);
+('Casa Colonial en el Centro Histórico', 'Hermosa casa colonial restaurada en el corazón de San Salvador. Arquitectura tradicional con todas las comodidades modernas.', 'San Salvador, El Salvador', 75.00, 4, 2, 1, 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800', 1, 1, 0),
+('Villa Frente al Mar con Piscina', 'Espectacular villa con acceso directo a la playa de El Tunco. Piscina infinity con vista al océano Pacífico.', 'El Tunco, La Libertad', 180.00, 8, 4, 3, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800', 1, 1, 1),
+('Cabaña Eco-turística en la Montaña', 'Acogedora cabaña rodeada de naturaleza en las montañas de Apaneca. Perfecta para desconectar y respirar aire puro.', 'Apaneca, Ahuachapán', 55.00, 3, 1, 1, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800', 1, 1, 0),
+('Apartamento Moderno en Santa Elena', 'Moderno apartamento en zona exclusiva de Antiguo Cuscatlán. Cerca de restaurantes, centros comerciales y todo lo que necesitas.', 'Antiguo Cuscatlán, La Libertad', 90.00, 4, 2, 2, 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800', 1, 1, 0),
+('Casa de Playa en El Sunzal', 'Casa familiar a pocos pasos de la playa de El Sunzal. Ideal para surfistas y amantes del mar con vista espectacular.', 'El Sunzal, La Libertad', 110.00, 6, 3, 2, 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800', 1, 1, 0),
+('Loft Contemporáneo en Escalón', 'Elegante loft en la Colonia Escalón con diseño minimalista. Perfecto para viajeros de negocios o parejas.', 'Colonia Escalón, San Salvador', 85.00, 2, 1, 1, 'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800', 1, 1, 1),
+('Finca Cafetalera con Vista al Lago', 'Hermosa finca en las alturas de Coatepeque con vista panorámica al lago. Incluye recorrido por plantación de café.', 'Lago de Coatepeque, Santa Ana', 120.00, 5, 2, 2, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800', 1, 1, 1),
+('Cabaña Rústica en Ruta de las Flores', 'Encantadora cabaña de madera en Juayúa, corazón de la Ruta de las Flores. Perfecta para explorar pueblos pintorescos.', 'Juayúa, Sonsonate', 65.00, 4, 2, 1, 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800', 1, 1, 0);

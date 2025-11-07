@@ -8,7 +8,7 @@
         
         <!-- Buscador -->
         <div class="search-box">
-            <form method="GET" action="/buscar" class="search-form">
+            <form method="GET" action="<?= UrlHelper::to('buscar') ?>" class="search-form">
                 <input 
                     type="text" 
                     name="q" 
@@ -101,7 +101,7 @@
                                     <?php if (in_array($alojamiento['id'], $selectedIds)): ?>
                                         <span class="badge badge-success">✓ Seleccionado</span>
                                     <?php else: ?>
-                                        <form method="POST" action="/alojamiento/select" style="display: inline;">
+                                        <form method="POST" action="<?= UrlHelper::to('alojamiento/select') ?>" style="display: inline;">
                                             <input type="hidden" name="alojamiento_id" value="<?= $alojamiento['id'] ?>">
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 Seleccionar

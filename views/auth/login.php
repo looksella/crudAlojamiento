@@ -7,7 +7,7 @@
             <p>Accede a tu cuenta para gestionar tus alojamientos</p>
         </div>
 
-        <form method="POST" action="/login" class="auth-form">
+        <form method="POST" action="<?= UrlHelper::to('login') ?>" class="auth-form">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input 
@@ -37,7 +37,7 @@
         </form>
 
         <div class="auth-footer">
-            <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
+            <p>¿No tienes cuenta? <a href="<?= UrlHelper::to('register') ?>">Regístrate aquí</a></p>
         </div>
 
         <!-- Credenciales de prueba -->

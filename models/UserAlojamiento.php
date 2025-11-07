@@ -1,9 +1,5 @@
 <?php
-/**
- * Clase UserAlojamiento
- * Responsabilidad: Gestionar la relación entre usuarios y alojamientos
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
+
 class UserAlojamiento {
     private $conn;
     private $table = 'usuarios_alojamientos';
@@ -12,16 +8,12 @@ class UserAlojamiento {
     public $id_usuario;
     public $id_alojamiento;
 
-    /**
-     * Constructor - Inyección de dependencias
-     */
+//creamos el constructor para la inyección de las dependencias
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    /**
-     * Agregar selección de alojamiento
-     */
+//ahora agregamos la selección de alojamiento
     public function add() {
         // Verificar si ya existe la selección
         if ($this->exists()) {
@@ -42,9 +34,7 @@ class UserAlojamiento {
         return false;
     }
 
-    /**
-     * Verificar si ya existe la selección
-     */
+    //verificamos si ya existe la selección
     public function exists() {
         $query = "SELECT id FROM {$this->table} 
                   WHERE id_usuario = :id_usuario AND id_alojamiento = :id_alojamiento 
@@ -58,9 +48,7 @@ class UserAlojamiento {
         return $stmt->rowCount() > 0;
     }
 
-    /**
-     * Eliminar selección
-     */
+    //ahora eliminamos la selección
     public function remove() {
         $query = "DELETE FROM {$this->table} 
                   WHERE id_usuario = :id_usuario AND id_alojamiento = :id_alojamiento";
@@ -72,9 +60,7 @@ class UserAlojamiento {
         return $stmt->execute();
     }
 
-    /**
-     * Obtener alojamientos seleccionados por un usuario
-     */
+    //se obtienen los alojamientos seleccionados por el usuario
     public function getUserAlojamientos($userId) {
         $query = "SELECT a.*, ua.fecha_seleccion 
                   FROM alojamientos a 
@@ -89,9 +75,7 @@ class UserAlojamiento {
         return $stmt->fetchAll();
     }
 
-    /**
-     * Obtener IDs de alojamientos seleccionados por un usuario
-     */
+    //obtencion de los ids de los alojamientos seleccionados por el usuario
     public function getUserAlojamientoIds($userId) {
         $query = "SELECT id_alojamiento FROM {$this->table} 
                   WHERE id_usuario = :id_usuario";
@@ -104,9 +88,7 @@ class UserAlojamiento {
         return array_column($result, 'id_alojamiento');
     }
 
-    /**
-     * Contar selecciones de un usuario
-     */
+    //contador de las selecciones del usuario
     public function countUserSelections($userId) {
         $query = "SELECT COUNT(*) as total FROM {$this->table} 
                   WHERE id_usuario = :id_usuario";
@@ -119,9 +101,7 @@ class UserAlojamiento {
         return $result['total'] ?? 0;
     }
 
-    /**
-     * Obtener total de selecciones
-     */
+    //obtencion del total de las selecciones
     public function getTotalSelections() {
         $query = "SELECT COUNT(*) as total FROM {$this->table}";
         $stmt = $this->conn->prepare($query);
@@ -131,9 +111,7 @@ class UserAlojamiento {
         return $result['total'] ?? 0;
     }
 
-    /**
-     * Eliminar todas las selecciones de un usuario
-     */
+    //eliminamos todas las selecciones del usuario
     public function removeAllUserSelections($userId) {
         $query = "DELETE FROM {$this->table} WHERE id_usuario = :id_usuario";
         $stmt = $this->conn->prepare($query);

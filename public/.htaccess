@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Establecer la base de reescritura
-RewriteBase /alojamientos-crud/public/
+RewriteBase /crudAlojamiento/public/
 
 # Redirigir todas las peticiones al index.php excepto archivos existentes
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -13,7 +13,7 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 Options -Indexes
 
 # Configurar la página de error 404
-ErrorDocument 404 /alojamientos-crud/public/index.php
+ErrorDocument 404 /crudAlojamiento/public/index.php
 
 # Habilitar compresión
 <IfModule mod_deflate.c>

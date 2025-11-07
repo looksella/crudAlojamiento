@@ -1,13 +1,7 @@
 <?php
-/**
- * Clase Controller (Base)
- * Responsabilidad: Proporcionar funcionalidad común a todos los controladores
- * Principio SOLID: Open/Closed Principle (OCP) - Abierto para extensión, cerrado para modificación
- */
+
 abstract class Controller {
-    /**
-     * Renderizar una vista
-     */
+    //Aquí se renderiza la vista
     protected function view($view, $data = []) {
         extract($data);
         $viewPath = __DIR__ . "/../views/{$view}.php";
@@ -19,17 +13,15 @@ abstract class Controller {
         require_once $viewPath;
     }
 
-    /**
-     * Redirigir a una URL
-     */
+    //redirigir a una URL
     protected function redirect($url) {
-        header("Location: {$url}");
+        require_once __DIR__ . "/../helpers/UrlHelper.php";
+        $fullUrl = UrlHelper::to($url);
+        header("Location: {$fullUrl}");
         exit;
     }
 
-    /**
-     * Retornar JSON
-     */
+    //Aquí se retorna el JSON
     protected function json($data, $statusCode = 200) {
         http_response_code($statusCode);
         header('Content-Type: application/json');
@@ -37,23 +29,17 @@ abstract class Controller {
         exit;
     }
 
-    /**
-     * Verificar si es una petición POST
-     */
+    //Se verifica si es una petición POST
     protected function isPost() {
         return $_SERVER['REQUEST_METHOD'] === 'POST';
     }
 
-    /**
-     * Verificar si es una petición GET
-     */
+   //Se verifica si es una petición GET
     protected function isGet() {
         return $_SERVER['REQUEST_METHOD'] === 'GET';
     }
 
-    /**
-     * Obtener datos POST
-     */
+    //Obtener datos POST
     protected function post($key = null, $default = null) {
         if ($key === null) {
             return $_POST;
@@ -61,9 +47,7 @@ abstract class Controller {
         return $_POST[$key] ?? $default;
     }
 
-    /**
-     * Obtener datos GET
-     */
+    //Obtener datos GET
     protected function get($key = null, $default = null) {
         if ($key === null) {
             return $_GET;
@@ -71,23 +55,19 @@ abstract class Controller {
         return $_GET[$key] ?? $default;
     }
 
-    /**
-     * Verificar autenticación
-     */
+    //se verifica que este autenticado
     protected function requireAuth() {
         if (!Session::isAuthenticated()) {
-            Session::setFlash('error', 'Debes iniciar sesión para acceder');
-            $this->redirect('/login');
+            Session::setFlash('error', 'Debes iniciar sesión para poder acceder');
+            $this->redirect('login');
         }
     }
 
-    /**
-     * Verificar que sea administrador
-     */
+    //verficamos que sea administrado
     protected function requireAdmin() {
         $this->requireAuth();
         if (!Session::isAdmin()) {
-            Session::setFlash('error', 'No tienes permisos para acceder');
+            Session::setFlash('error', 'No tienes permisos para acceder >:v');
             $this->redirect('/');
         }
     }

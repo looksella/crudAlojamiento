@@ -1,9 +1,5 @@
 <?php
-/**
- * Clase Database
- * Responsabilidad: Gestionar la conexión a la base de datos
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
+
 class Database {
     private $host = 'localhost';
     private $db_name = 'alojamientos_db';
@@ -11,10 +7,7 @@ class Database {
     private $password = '';
     private $conn = null;
 
-    /**
-     * Obtener la conexión a la base de datos
-     * @return PDO|null
-     */
+    //se obtiene la conexión a la base de datos
     public function getConnection() {
         if ($this->conn === null) {
             try {
@@ -35,9 +28,7 @@ class Database {
         return $this->conn;
     }
 
-    /**
-     * Cerrar la conexión
-     */
+    //cerramos la conexión
     public function closeConnection() {
         $this->conn = null;
     }

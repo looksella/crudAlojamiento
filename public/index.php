@@ -12,6 +12,7 @@ require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../core/Router.php';
 require_once __DIR__ . '/../helpers/Session.php';
 require_once __DIR__ . '/../helpers/Validator.php';
+require_once __DIR__ . '/../helpers/UrlHelper.php';
 
 // Conectar a la base de datos
 $database = new Database();

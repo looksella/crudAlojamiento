@@ -1,9 +1,5 @@
 <?php
-/**
- * Clase Alojamiento
- * Responsabilidad: Gestionar operaciones de alojamientos en la base de datos
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
+
 class Alojamiento {
     private $conn;
     private $table = 'alojamientos';
@@ -22,16 +18,12 @@ class Alojamiento {
     public $piscina;
     public $disponible;
 
-    /**
-     * Constructor - Inyección de dependencias
-     */
+    //creamos el constructor para la inyección de dependencias
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    /**
-     * Crear un nuevo alojamiento
-     */
+   //crear un nuevo alojamiento
     public function create() {
         $query = "INSERT INTO {$this->table} 
                   (nombre, descripcion, ubicacion, precio, capacidad, habitaciones, banos, 
@@ -75,9 +67,7 @@ class Alojamiento {
         return false;
     }
 
-    /**
-     * Obtener todos los alojamientos disponibles
-     */
+    //obtener todos los alojamientos disponibles
     public function getAll($disponible = true) {
         $query = "SELECT * FROM {$this->table}";
         
@@ -97,9 +87,7 @@ class Alojamiento {
         return $stmt->fetchAll();
     }
 
-    /**
-     * Buscar alojamiento por ID
-     */
+   //busqueda por id
     public function findById($id) {
         $query = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
         $stmt = $this->conn->prepare($query);
@@ -109,9 +97,7 @@ class Alojamiento {
         return $stmt->fetch();
     }
 
-    /**
-     * Actualizar alojamiento
-     */
+    //actualizar alojamiento
     public function update() {
         $query = "UPDATE {$this->table} 
                   SET nombre = :nombre, 
@@ -152,9 +138,7 @@ class Alojamiento {
         return $stmt->execute();
     }
 
-    /**
-     * Eliminar alojamiento
-     */
+    //eliminar alojamiento
     public function delete() {
         $query = "DELETE FROM {$this->table} WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -163,9 +147,7 @@ class Alojamiento {
         return $stmt->execute();
     }
 
-    /**
-     * Buscar alojamientos
-     */
+    //buscar alojamientos
     public function search($search, $ubicacion = null, $precioMin = null, $precioMax = null) {
         $query = "SELECT * FROM {$this->table} WHERE disponible = 1";
         
@@ -211,9 +193,7 @@ class Alojamiento {
         return $stmt->fetchAll();
     }
 
-    /**
-     * Contar alojamientos
-     */
+    //contar alojamientos
     public function count($disponible = true) {
         $query = "SELECT COUNT(*) as total FROM {$this->table}";
         

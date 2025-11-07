@@ -13,7 +13,7 @@ Session::delete('old_email');
             <p>Regístrate para empezar a seleccionar alojamientos</p>
         </div>
 
-        <form method="POST" action="/register" class="auth-form">
+        <form method="POST" action="<?= UrlHelper::to('register') ?>" class="auth-form">
             <div class="form-group">
                 <label for="nombre">Nombre Completo</label>
                 <input 
@@ -68,7 +68,7 @@ Session::delete('old_email');
         </form>
 
         <div class="auth-footer">
-            <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
+            <p>¿Ya tienes cuenta? <a href="<?= UrlHelper::to('login') ?>">Inicia sesión aquí</a></p>
         </div>
     </div>
 </div>

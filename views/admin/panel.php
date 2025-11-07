@@ -8,7 +8,7 @@
                 <h1>Panel de Administrador</h1>
                 <p>Gestiona los alojamientos del sistema</p>
             </div>
-            <a href="/" class="btn btn-secondary">
+            <a href="<?= UrlHelper::to('/') ?>" class="btn btn-secondary">
                 ← Ver Página Principal
             </a>
         </div>
@@ -55,7 +55,7 @@
             <div class="form-card">
                 <h2>Agregar Nuevo Alojamiento</h2>
                 
-                <form method="POST" action="/admin/alojamiento/create" class="admin-form">
+                <form method="POST" action="<?= UrlHelper::to('admin/alojamiento/create') ?>" class="admin-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombre">Nombre del Alojamiento *</label>

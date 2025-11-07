@@ -1,10 +1,5 @@
 <?php
-/**
- * Clase User
- * Responsabilidad: Gestionar operaciones de usuarios en la base de datos
- * Principio SOLID: Single Responsibility Principle (SRP)
- * Principio SOLID: Dependency Inversion Principle (DIP) - Depende de abstracción (PDO)
- */
+
 class User {
     private $conn;
     private $table = 'usuarios';
@@ -16,16 +11,12 @@ class User {
     public $rol;
     public $fecha_creacion;
 
-    /**
-     * Constructor - Inyección de dependencias
-     */
+   
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    /**
-     * Crear un nuevo usuario
-     */
+
     public function create() {
         $query = "INSERT INTO {$this->table} (nombre, email, password, rol) 
                   VALUES (:nombre, :email, :password, :rol)";
@@ -49,9 +40,6 @@ class User {
         return false;
     }
 
-    /**
-     * Buscar usuario por email
-     */
     public function findByEmail($email) {
         $query = "SELECT * FROM {$this->table} WHERE email = :email LIMIT 1";
         $stmt = $this->conn->prepare($query);
@@ -61,9 +49,7 @@ class User {
         return $stmt->fetch();
     }
 
-    /**
-     * Buscar usuario por ID
-     */
+
     public function findById($id) {
         $query = "SELECT id, nombre, email, rol, fecha_creacion 
                   FROM {$this->table} WHERE id = :id LIMIT 1";
@@ -74,9 +60,6 @@ class User {
         return $stmt->fetch();
     }
 
-    /**
-     * Verificar si el email ya existe
-     */
     public function emailExists($email) {
         $query = "SELECT id FROM {$this->table} WHERE email = :email LIMIT 1";
         $stmt = $this->conn->prepare($query);
@@ -86,9 +69,7 @@ class User {
         return $stmt->rowCount() > 0;
     }
 
-    /**
-     * Verificar credenciales de login
-     */
+
     public function verifyCredentials($email, $password) {
         $user = $this->findByEmail($email);
         
@@ -99,9 +80,6 @@ class User {
         return false;
     }
 
-    /**
-     * Actualizar usuario
-     */
     public function update() {
         $query = "UPDATE {$this->table} 
                   SET nombre = :nombre, email = :email 
@@ -119,9 +97,6 @@ class User {
         return $stmt->execute();
     }
 
-    /**
-     * Obtener todos los usuarios
-     */
     public function getAll() {
         $query = "SELECT id, nombre, email, rol, fecha_creacion 
                   FROM {$this->table} ORDER BY fecha_creacion DESC";
@@ -131,9 +106,7 @@ class User {
         return $stmt->fetchAll();
     }
 
-    /**
-     * Contar usuarios
-     */
+ 
     public function count() {
         $query = "SELECT COUNT(*) as total FROM {$this->table}";
         $stmt = $this->conn->prepare($query);

@@ -1,9 +1,5 @@
 <?php
-/**
- * Clase Router
- * Responsabilidad: Gestionar el enrutamiento de la aplicación
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
+//creamos el router para manejar las rutas
 class Router {
     private $routes = [];
     private $db;
@@ -12,32 +8,32 @@ class Router {
         $this->db = $db;
     }
 
-    /**
-     * Registrar una ruta GET
-     */
     public function get($path, $controller, $method) {
         $this->routes['GET'][$path] = ['controller' => $controller, 'method' => $method];
         return $this;
     }
 
-    /**
-     * Registrar una ruta POST
-     */
+
     public function post($path, $controller, $method) {
         $this->routes['POST'][$path] = ['controller' => $controller, 'method' => $method];
         return $this;
     }
 
-    /**
-     * Ejecutar el enrutador
-     */
     public function run() {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Remover el directorio base si existe
+        // Obtener el directorio base
         $scriptName = dirname($_SERVER['SCRIPT_NAME']);
-        if ($scriptName !== '/') {
+        
+        // Si estamos en /public/, remover /public de la URI
+        if (strpos($scriptName, '/public') !== false || strpos($requestUri, '/public') !== false) {
+            $requestUri = str_replace('/public', '', $requestUri);
+            $scriptName = dirname($scriptName);
+        }
+        
+        // Remover el directorio base si existe
+        if ($scriptName !== '/' && $scriptName !== '\\') {
             $requestUri = str_replace($scriptName, '', $requestUri);
         }
         
@@ -45,6 +41,9 @@ class Router {
         if (empty($requestUri) || $requestUri[0] !== '/') {
             $requestUri = '/' . $requestUri;
         }
+        
+        // Limpiar dobles barras
+        $requestUri = preg_replace('#/+#', '/', $requestUri);
 
         // Buscar la ruta
         if (isset($this->routes[$requestMethod][$requestUri])) {

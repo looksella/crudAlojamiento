@@ -8,7 +8,7 @@
                 <h1>Mi Cuenta</h1>
                 <p>Bienvenido, <?= htmlspecialchars($user['nombre']) ?></p>
             </div>
-            <a href="/" class="btn btn-secondary">
+            <a href="<?= UrlHelper::to('/') ?>" class="btn btn-secondary">
                 ← Volver al Inicio
             </a>
         </div>
@@ -49,7 +49,7 @@
                     <div class="empty-icon">🏠</div>
                     <h3>No tienes alojamientos seleccionados</h3>
                     <p>Explora nuestros alojamientos disponibles y selecciona los que te interesen</p>
-                    <a href="/" class="btn btn-primary">
+                    <a href="<?= UrlHelper::to('/') ?>" class="btn btn-primary">
                         Explorar Alojamientos
                     </a>
                 </div>
@@ -99,7 +99,7 @@
                                         <span>/noche</span>
                                     </div>
                                     
-                                    <form method="POST" action="/alojamiento/remove" 
+                                    <form method="POST" action="<?= UrlHelper::to('alojamiento/remove') ?>" 
                                           onsubmit="return confirm('¿Eliminar este alojamiento de tus selecciones?')">
                                         <input type="hidden" name="alojamiento_id" value="<?= $alojamiento['id'] ?>">
                                         <button type="submit" class="btn btn-danger btn-sm">

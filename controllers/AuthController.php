@@ -4,11 +4,6 @@ require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../helpers/Session.php';
 require_once __DIR__ . '/../helpers/Validator.php';
 
-/**
- * Clase AuthController
- * Responsabilidad: Gestionar autenticación y registro de usuarios
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
 class AuthController extends Controller {
     private $db;
     private $userModel;
@@ -18,16 +13,13 @@ class AuthController extends Controller {
         $this->userModel = new User($db);
     }
 
-    /**
-     * Mostrar formulario de login
-     */
     public function showLogin() {
         // Si ya está autenticado, redirigir
         if (Session::isAuthenticated()) {
             if (Session::isAdmin()) {
-                $this->redirect('/admin');
+                $this->redirect('admin');
             } else {
-                $this->redirect('/dashboard');
+                $this->redirect('dashboard');
             }
             return;
         }
@@ -37,12 +29,9 @@ class AuthController extends Controller {
         ]);
     }
 
-    /**
-     * Procesar login
-     */
     public function login() {
         if (!$this->isPost()) {
-            $this->redirect('/login');
+            $this->redirect('login');
             return;
         }
 
@@ -57,7 +46,7 @@ class AuthController extends Controller {
 
         if ($validator->fails()) {
             Session::setFlash('error', $validator->getFirstError());
-            $this->redirect('/login');
+            $this->redirect('login');
             return;
         }
 
@@ -66,7 +55,7 @@ class AuthController extends Controller {
 
         if (!$user) {
             Session::setFlash('error', 'Credenciales incorrectas');
-            $this->redirect('/login');
+            $this->redirect('login');
             return;
         }
 
@@ -74,25 +63,23 @@ class AuthController extends Controller {
         Session::set('user_id', $user['id']);
         Session::set('user_name', $user['nombre']);
         Session::set('user_email', $user['email']);
-        Session::set('user_role', $user['rol']);
+        Session::set('user_role', $user['rol']); // Asegurar que el rol se guarde correctamente
 
         Session::setFlash('success', '¡Bienvenido ' . $user['nombre'] . '!');
 
         // Redirigir según el rol
         if ($user['rol'] === 'admin') {
-            $this->redirect('/admin');
+            $this->redirect('admin');
         } else {
-            $this->redirect('/dashboard');
+            $this->redirect('dashboard');
         }
     }
 
-    /**
-     * Mostrar formulario de registro
-     */
+//Mostramos el formulario de registro
     public function showRegister() {
         // Si ya está autenticado, redirigir
         if (Session::isAuthenticated()) {
-            $this->redirect('/');
+            $this->redirect('');
             return;
         }
 
@@ -101,12 +88,9 @@ class AuthController extends Controller {
         ]);
     }
 
-    /**
-     * Procesar registro
-     */
     public function register() {
         if (!$this->isPost()) {
-            $this->redirect('/register');
+            $this->redirect('register');
             return;
         }
 
@@ -129,7 +113,7 @@ class AuthController extends Controller {
             Session::setFlash('error', $validator->getFirstError());
             Session::set('old_nombre', $nombre);
             Session::set('old_email', $email);
-            $this->redirect('/register');
+            $this->redirect('register');
             return;
         }
 
@@ -137,7 +121,7 @@ class AuthController extends Controller {
         if ($this->userModel->emailExists($email)) {
             Session::setFlash('error', 'Este email ya está registrado');
             Session::set('old_nombre', $nombre);
-            $this->redirect('/register');
+            $this->redirect('register');
             return;
         }
 
@@ -155,19 +139,17 @@ class AuthController extends Controller {
             Session::set('user_role', 'usuario');
 
             Session::setFlash('success', '¡Registro exitoso! Bienvenido ' . $nombre);
-            $this->redirect('/dashboard');
+            $this->redirect('dashboard');
         } else {
             Session::setFlash('error', 'Error al crear la cuenta. Intenta nuevamente');
-            $this->redirect('/register');
+            $this->redirect('register');
         }
     }
 
-    /**
-     * Cerrar sesión
-     */
+
     public function logout() {
         Session::destroy();
         Session::setFlash('success', 'Sesión cerrada correctamente');
-        $this->redirect('/');
+        $this->redirect('');
     }
 }

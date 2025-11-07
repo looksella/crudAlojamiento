@@ -1,10 +1,12 @@
 <?php
 Session::start();
+require_once __DIR__ . '/../../helpers/UrlHelper.php';
 $isAuthenticated = Session::isAuthenticated();
 $isAdmin = Session::isAdmin();
 $userName = Session::get('user_name', 'Usuario');
 $flashSuccess = Session::getFlash('success');
 $flashError = Session::getFlash('error');
+$baseUrl = UrlHelper::basePath();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,7 +14,7 @@ $flashError = Session::getFlash('error');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Alojamientos' ?></title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="<?= UrlHelper::asset('css/style.css') ?>">
 </head>
 <body>
     <!-- Header -->
@@ -20,7 +22,7 @@ $flashError = Session::getFlash('error');
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <a href="/">🏠 Alojamientos</a>
+                    <a href="<?= UrlHelper::to('/') ?>">🏠 Alojamientos</a>
                 </div>
                 
                 <nav class="nav">
@@ -33,15 +35,15 @@ $flashError = Session::getFlash('error');
                         </span>
                         
                         <?php if ($isAdmin): ?>
-                            <a href="/admin" class="btn btn-secondary">Panel Admin</a>
+                            <a href="<?= UrlHelper::to('admin') ?>" class="btn btn-secondary">Panel Admin</a>
                         <?php else: ?>
-                            <a href="/dashboard" class="btn btn-secondary">Mi Cuenta</a>
+                            <a href="<?= UrlHelper::to('dashboard') ?>" class="btn btn-secondary">Mi Cuenta</a>
                         <?php endif; ?>
                         
-                        <a href="/logout" class="btn btn-outline">Cerrar Sesión</a>
+                        <a href="<?= UrlHelper::to('logout') ?>" class="btn btn-outline">Cerrar Sesión</a>
                     <?php else: ?>
-                        <a href="/register" class="btn btn-secondary">Registrarse</a>
-                        <a href="/login" class="btn btn-primary">Iniciar Sesión</a>
+                        <a href="<?= UrlHelper::to('register') ?>" class="btn btn-secondary">Registrarse</a>
+                        <a href="<?= UrlHelper::to('login') ?>" class="btn btn-primary">Iniciar Sesión</a>
                     <?php endif; ?>
                 </nav>
             </div>

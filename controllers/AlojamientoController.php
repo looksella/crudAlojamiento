@@ -5,11 +5,6 @@ require_once __DIR__ . '/../models/UserAlojamiento.php';
 require_once __DIR__ . '/../helpers/Session.php';
 require_once __DIR__ . '/../helpers/Validator.php';
 
-/**
- * Clase AlojamientoController
- * Responsabilidad: Gestionar operaciones CRUD de alojamientos
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
 class AlojamientoController extends Controller {
     private $db;
     private $alojamientoModel;
@@ -21,9 +16,7 @@ class AlojamientoController extends Controller {
         $this->userAlojamientoModel = new UserAlojamiento($db);
     }
 
-    /**
-     * Mostrar página principal con alojamientos
-     */
+
     public function index() {
         $alojamientos = $this->alojamientoModel->getAll(true);
         
@@ -42,9 +35,7 @@ class AlojamientoController extends Controller {
         ]);
     }
 
-    /**
-     * Crear nuevo alojamiento (solo admin)
-     */
+   //ahora creamos un nuevo alojamiento
     public function create() {
         $this->requireAdmin();
 
@@ -109,9 +100,7 @@ class AlojamientoController extends Controller {
         $this->redirect('/admin');
     }
 
-    /**
-     * Seleccionar alojamiento (usuario)
-     */
+    //se selecciona un alojamiento
     public function select() {
         $this->requireAuth();
 
@@ -149,9 +138,7 @@ class AlojamientoController extends Controller {
         $this->redirect('/');
     }
 
-    /**
-     * Eliminar selección de alojamiento (usuario)
-     */
+    //eliminamos la selección
     public function removeSelection() {
         $this->requireAuth();
 
@@ -181,9 +168,7 @@ class AlojamientoController extends Controller {
         $this->redirect('/dashboard');
     }
 
-    /**
-     * Buscar alojamientos
-     */
+    //buscamos los alojamientos
     public function search() {
         $search = $this->get('q', '');
         $ubicacion = $this->get('ubicacion', '');

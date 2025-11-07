@@ -12,10 +12,10 @@
                 <div class="footer-section">
                     <h4>Enlaces</h4>
                     <ul>
-                        <li><a href="/">Inicio</a></li>
-                        <li><a href="/buscar">Buscar</a></li>
+                        <li><a href="<?= UrlHelper::to('/') ?>">Inicio</a></li>
+                        <li><a href="<?= UrlHelper::to('buscar') ?>">Buscar</a></li>
                         <?php if (Session::isAuthenticated()): ?>
-                            <li><a href="/dashboard">Mi Cuenta</a></li>
+                            <li><a href="<?= UrlHelper::to('dashboard') ?>">Mi Cuenta</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -32,6 +32,6 @@
         </div>
     </footer>
 
-    <script src="/public/js/app.js"></script>
+    <script src="<?= UrlHelper::asset('js/app.js') ?>"></script>
 </body>
 </html>

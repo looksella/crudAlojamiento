@@ -5,11 +5,6 @@ require_once __DIR__ . '/../models/Alojamiento.php';
 require_once __DIR__ . '/../models/UserAlojamiento.php';
 require_once __DIR__ . '/../helpers/Session.php';
 
-/**
- * Clase UserController
- * Responsabilidad: Gestionar operaciones de usuario
- * Principio SOLID: Single Responsibility Principle (SRP)
- */
 class UserController extends Controller {
     private $db;
     private $userModel;
@@ -23,9 +18,7 @@ class UserController extends Controller {
         $this->userAlojamientoModel = new UserAlojamiento($db);
     }
 
-    /**
-     * Dashboard del usuario
-     */
+//dashboard del usuario
     public function dashboard() {
         $this->requireAuth();
 
@@ -45,9 +38,7 @@ class UserController extends Controller {
         ]);
     }
 
-    /**
-     * Panel de administrador
-     */
+//panel de administrador
     public function adminPanel() {
         $this->requireAdmin();
 
